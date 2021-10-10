@@ -8,6 +8,6 @@ namespace Generic_Planner
 {
     interface State
     {
-        string GetName();
+        int GetCost();
     }
 }

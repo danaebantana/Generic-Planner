@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Generic_Planner
 {
-    class BlocksWorld : AbstractDomain
+    class BlocksWorld 
     {
         private State initialState;
         private State goalState;
 
-        public override State GetInitialState()
+        /*public override State GetInitialState()
         {
             initialState = new BlockState();
             return initialState;
@@ -26,6 +26,6 @@ namespace Generic_Planner
         public override string GeneratePlan()
         {
             return "Plan Generated for BlocksWorld";
-        }
+        }*/
     }
 }

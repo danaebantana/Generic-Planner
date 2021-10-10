@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Generic_Planner
 {
-    class BlockState : State
+    class BlockState 
     {
         public string GetName()
         {
