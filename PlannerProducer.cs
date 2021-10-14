@@ -18,10 +18,10 @@ namespace Generic_Planner
             {
                 return new WaterPouringProblem();
             }
-            /*else if (domain.Equals("BlocksWorld"))
+            else if (domain.Equals("BlocksWorld"))
             {
                 return new BlocksWorld();
-            }*/
+            }
             return null;
         }
     }
