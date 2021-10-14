@@ -48,7 +48,7 @@ namespace Generic_Planner
         {
             List<State> successors = new List<State>();
             int J1 = sizeJug1, J2 = sizeJug2;
-            (int C1, int C2) = state.GetState();
+            (int C1, int C2) = state.GetState<int>();
             //Console.WriteLine("Generate Successors of state + ("+ C1 + " , " + C2 +")");
             State child;
             //Actions
@@ -105,9 +105,9 @@ namespace Generic_Planner
 
         public override bool CheckIfGoalState(State state, State goalState)
         {
-            (int C1, int C2) = state.GetState();
+            (int C1, int C2) = state.GetState<int>();
             int stateCost = state.GetCost();
-            (int GC1, int GC2) = goalState.GetState();
+            (int GC1, int GC2) = goalState.GetState<int>();
             int goalCost = goalState.GetCost();
             if (C1==GC1 && stateCost <= goalCost)
             {
@@ -128,7 +128,7 @@ namespace Generic_Planner
         {
             foreach (State s in list)
             {
-                if (state.GetState().Equals(s.GetState()))
+                if (state.GetState<int>().Equals(s.GetState<int>()))
                 {
                     if (state.GetCost() < s.GetCost())
                     {
@@ -143,7 +143,7 @@ namespace Generic_Planner
         {
             foreach (State s in list)
             {
-                if (state.GetState().Equals(s.GetState()))
+                if (state.GetState<int>().Equals(s.GetState<int>()))
                 {
                     return true;
                 }

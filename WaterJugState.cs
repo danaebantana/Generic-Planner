@@ -52,16 +52,19 @@ namespace Generic_Planner
             this.cost = c;
         }
 
-        public (int,int) GetState()
+        public void SetPath(String states)
+        {
+            this.path = states + "(" + this.GetState<int>().Item1 + " , " + this.GetState<int>().Item2 + ")\n";
+        }
+
+        public (int, int) GetState<T>()
         {
             return (this.waterJug1.Current, this.waterJug2.Current);
         }
 
-        public void SetPath(String states)
+        (T, T) State.GetState<T>()
         {
-            this.path = states + "(" + this.GetState().Item1 + " , " + this.GetState().Item2 + ")\n";
+            return ((T)Convert.ChangeType(this.waterJug1.Current, typeof(T)), (T)Convert.ChangeType(this.waterJug2.Current, typeof(T)));
         }
-
-        
     }
 }

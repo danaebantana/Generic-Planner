@@ -14,7 +14,7 @@ namespace Generic_Planner
 
         void SetPath(string states);
 
-        (int, int) GetState();
+        (T, T) GetState<T>();
 
         public void SetCost(int c);
     }
