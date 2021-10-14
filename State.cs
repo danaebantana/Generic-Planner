@@ -9,5 +9,13 @@ namespace Generic_Planner
     interface State
     {
         int GetCost();
+
+        string GetPath();
+
+        void SetPath(string states);
+
+        (int, int) GetState();
+
+        public void SetCost(int c);
     }
 }

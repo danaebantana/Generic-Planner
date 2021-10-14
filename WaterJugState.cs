@@ -6,36 +6,62 @@ using System.Threading.Tasks;
 
 namespace Generic_Planner
 {
-    class WaterJugState : State
+    class WaterJugState : State 
     {
-		private WaterJug waterJug1;
-		private WaterJug waterJug2;
-        private List<WaterJugState> path;
-		private int cost;  //or steps
+		private (int Size, int Current) waterJug1;
+		private (int Size, int Current) waterJug2;
+        private string path;
+		private int cost;  //number of steps
 
-        public WaterJugState(WaterJug j1, WaterJug j2)  //Constructor for initial state.
+        public WaterJugState(int j1, int j2)  //Constructor for initial state.
         {
-            this.waterJug1 = j1;
-            this.waterJug2 = j2;
+            this.waterJug1 = (j1, 0);
+            this.waterJug2 = (j2, 0);
             this.cost = 0;
-            this.path = new List<WaterJugState>();
-            Console.WriteLine("WaterJugState created with Jug1: "+ waterJug1.GetCapacity() + " and Jug2: " + waterJug2.GetCapacity());
+            this.path = "(0 , 0)\n"; //put initial state in path
         }
 
-        public WaterJugState(WaterJug j1, WaterJug j2, int waterGoal)  //Constructor for goal state.
+        public WaterJugState(int j1, int j2, int waterGoal)  //Constructor for goal state.
         {
-            this.waterJug1 = j1;
-            this.waterJug2 = j2;   
-            this.waterJug1.SetWaterLevel(waterGoal);
-            this.cost = 0;
-            this.path = new List<WaterJugState>();
-            Console.WriteLine("WaterJugState created with Jug1: " + waterJug1.GetCapacity() + " and Jug2: " + waterJug2.GetCapacity() + " and WaterGoalLevel: "+
-                waterJug1.GetWaterLevel());
+            this.waterJug1 = (j1, waterGoal);
+            this.waterJug2 = (j2, 0);
+            this.cost = Int32.MaxValue;
+            this.path = ""; //empty path for goal state
         }
 
-		public int GetCost()
+        public WaterJugState(int j1, int j2, int c1, int c2)   //Constructor for intermediate states
+        {
+            this.waterJug1 = (j1, c1);
+            this.waterJug2 = (j2, c2);
+            this.cost = 0;
+            this.path = "";
+        }
+
+        public string GetPath()
+        {
+            return this.path;
+        }
+
+        public int GetCost()
         {
             return this.cost;
         }
+
+        public void SetCost(int c)
+        {
+            this.cost = c;
+        }
+
+        public (int,int) GetState()
+        {
+            return (this.waterJug1.Current, this.waterJug2.Current);
+        }
+
+        public void SetPath(String states)
+        {
+            this.path = states + "(" + this.GetState().Item1 + " , " + this.GetState().Item2 + ")\n";
+        }
+
+        
     }
 }

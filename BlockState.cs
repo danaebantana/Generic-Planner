@@ -8,9 +8,10 @@ namespace Generic_Planner
 {
     class BlockState 
     {
-        public string GetName()
-        {
-            return "BlockState";
-        }
+        private List<char[]> elements = new List<char[]>();
+        private int cost;
+        private string path;
+
+        
     }
 }

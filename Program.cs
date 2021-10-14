@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Generic_Planner
 {
@@ -9,11 +10,14 @@ namespace Generic_Planner
             PlannerProducer pp = new PlannerProducer();
 
             AbstractDomain planner = pp.CreateDomain("WaterPouringProblem");
-            planner.SetParameters(4, 3, 2);
+            planner.SetParameters(new List<int>() { 4, 3, 2});
             State initalState = planner.InitialState();
             State goalState = planner.GoalState();
-            //planner.GeneratePlan();
-            //Console.WriteLine("Hello World!");
+            string solution = planner.GeneratePlan(initalState,goalState);
+            Console.WriteLine("Solution:\n" + solution);
+
+            
+
         }
     }
 }

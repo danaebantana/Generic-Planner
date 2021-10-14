@@ -11,3 +11,16 @@ C:\Users\Danae\Desktop\Πα.Πει\2. ΕΑΡΙΝΑ\ΚΑΤΑΝΕΜΗΜΕΝΗ ΤΕ
 C:\Users\Danae\Desktop\Πα.Πει\2. ΕΑΡΙΝΑ\ΚΑΤΑΝΕΜΗΜΕΝΗ ΤΕΧΝΗΤΗ ΝΟΗΜΟΣΥΝΗ\Generic-Planner\Generic-Planner\obj\Debug\netcoreapp3.1\Generic-Planner.dll
 C:\Users\Danae\Desktop\Πα.Πει\2. ΕΑΡΙΝΑ\ΚΑΤΑΝΕΜΗΜΕΝΗ ΤΕΧΝΗΤΗ ΝΟΗΜΟΣΥΝΗ\Generic-Planner\Generic-Planner\obj\Debug\netcoreapp3.1\Generic-Planner.pdb
 C:\Users\Danae\Desktop\Πα.Πει\2. ΕΑΡΙΝΑ\ΚΑΤΑΝΕΜΗΜΕΝΗ ΤΕΧΝΗΤΗ ΝΟΗΜΟΣΥΝΗ\Generic-Planner\Generic-Planner\obj\Debug\netcoreapp3.1\Generic-Planner.genruntimeconfig.cache
+C:\Users\Danae\Desktop\Πα.Πει\2. ΕΑΡΙΝΑ\ΚΑΤΑΝΕΜΗΜΕΝΗ ΤΕΧΝΗΤΗ ΝΟΗΜΟΣΥΝΗ\Generic-Planner\bin\Debug\netcoreapp3.1\Generic-Planner.exe
+C:\Users\Danae\Desktop\Πα.Πει\2. ΕΑΡΙΝΑ\ΚΑΤΑΝΕΜΗΜΕΝΗ ΤΕΧΝΗΤΗ ΝΟΗΜΟΣΥΝΗ\Generic-Planner\bin\Debug\netcoreapp3.1\Generic-Planner.deps.json
+C:\Users\Danae\Desktop\Πα.Πει\2. ΕΑΡΙΝΑ\ΚΑΤΑΝΕΜΗΜΕΝΗ ΤΕΧΝΗΤΗ ΝΟΗΜΟΣΥΝΗ\Generic-Planner\bin\Debug\netcoreapp3.1\Generic-Planner.runtimeconfig.json
+C:\Users\Danae\Desktop\Πα.Πει\2. ΕΑΡΙΝΑ\ΚΑΤΑΝΕΜΗΜΕΝΗ ΤΕΧΝΗΤΗ ΝΟΗΜΟΣΥΝΗ\Generic-Planner\bin\Debug\netcoreapp3.1\Generic-Planner.runtimeconfig.dev.json
+C:\Users\Danae\Desktop\Πα.Πει\2. ΕΑΡΙΝΑ\ΚΑΤΑΝΕΜΗΜΕΝΗ ΤΕΧΝΗΤΗ ΝΟΗΜΟΣΥΝΗ\Generic-Planner\bin\Debug\netcoreapp3.1\Generic-Planner.dll
+C:\Users\Danae\Desktop\Πα.Πει\2. ΕΑΡΙΝΑ\ΚΑΤΑΝΕΜΗΜΕΝΗ ΤΕΧΝΗΤΗ ΝΟΗΜΟΣΥΝΗ\Generic-Planner\bin\Debug\netcoreapp3.1\Generic-Planner.pdb
+C:\Users\Danae\Desktop\Πα.Πει\2. ΕΑΡΙΝΑ\ΚΑΤΑΝΕΜΗΜΕΝΗ ΤΕΧΝΗΤΗ ΝΟΗΜΟΣΥΝΗ\Generic-Planner\obj\Debug\netcoreapp3.1\Generic-Planner.csprojAssemblyReference.cache
+C:\Users\Danae\Desktop\Πα.Πει\2. ΕΑΡΙΝΑ\ΚΑΤΑΝΕΜΗΜΕΝΗ ΤΕΧΝΗΤΗ ΝΟΗΜΟΣΥΝΗ\Generic-Planner\obj\Debug\netcoreapp3.1\Generic-Planner.AssemblyInfoInputs.cache
+C:\Users\Danae\Desktop\Πα.Πει\2. ΕΑΡΙΝΑ\ΚΑΤΑΝΕΜΗΜΕΝΗ ΤΕΧΝΗΤΗ ΝΟΗΜΟΣΥΝΗ\Generic-Planner\obj\Debug\netcoreapp3.1\Generic-Planner.AssemblyInfo.cs
+C:\Users\Danae\Desktop\Πα.Πει\2. ΕΑΡΙΝΑ\ΚΑΤΑΝΕΜΗΜΕΝΗ ΤΕΧΝΗΤΗ ΝΟΗΜΟΣΥΝΗ\Generic-Planner\obj\Debug\netcoreapp3.1\Generic-Planner.csproj.CoreCompileInputs.cache
+C:\Users\Danae\Desktop\Πα.Πει\2. ΕΑΡΙΝΑ\ΚΑΤΑΝΕΜΗΜΕΝΗ ΤΕΧΝΗΤΗ ΝΟΗΜΟΣΥΝΗ\Generic-Planner\obj\Debug\netcoreapp3.1\Generic-Planner.dll
+C:\Users\Danae\Desktop\Πα.Πει\2. ΕΑΡΙΝΑ\ΚΑΤΑΝΕΜΗΜΕΝΗ ΤΕΧΝΗΤΗ ΝΟΗΜΟΣΥΝΗ\Generic-Planner\obj\Debug\netcoreapp3.1\Generic-Planner.pdb
+C:\Users\Danae\Desktop\Πα.Πει\2. ΕΑΡΙΝΑ\ΚΑΤΑΝΕΜΗΜΕΝΗ ΤΕΧΝΗΤΗ ΝΟΗΜΟΣΥΝΗ\Generic-Planner\obj\Debug\netcoreapp3.1\Generic-Planner.genruntimeconfig.cache
