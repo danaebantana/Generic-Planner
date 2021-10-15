@@ -119,7 +119,7 @@ namespace Generic_Planner
             }
         }
 
-        public override int Heuristic()
+        public override int Heuristic(State state)
         {
             return 1;
         }

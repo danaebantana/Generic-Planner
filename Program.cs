@@ -17,7 +17,7 @@ namespace Generic_Planner
             Console.WriteLine("Solution:\n" + solution);*/
 
             AbstractDomain planner = pp.CreateDomain("BlocksWorld");
-            planner.SetParameters(new List<int>() { 4, 2 });
+            planner.SetParameters(new List<int>() { 4, 4 });
             State initalState = planner.InitialState();
             Console.WriteLine("Initial State: " + initalState.GetPath());
             State goalState = planner.GoalState();

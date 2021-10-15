@@ -22,9 +22,9 @@ namespace Generic_Planner
 
         public abstract List<State> GenerateSuccessors(State state);
 
-        public abstract int Heuristic();
+        public abstract int Heuristic(State state);
 
-        public abstract bool CheckSuccessor(State state, List<State> openlist);
+        public abstract bool CheckSuccessor(State state, List<State> list);
 
         public abstract bool CheckIfInList(State state, List<State> list);
 
@@ -59,10 +59,10 @@ namespace Generic_Planner
                         break;
                     }
 
-                    successor.SetCost(q.GetCost() + Heuristic());
+                    successor.SetCost(q.GetCost() + Heuristic(successor));
                     successor.SetPath(q.GetPath());
 
-                    if (CheckSuccessor(successor, openList))  //Returns true if successor state is already in openlist but has a smaller 
+                    if (CheckSuccessor(successor, openList))  //Returns true if successor state is already in openlist but has a smaller cost
                     {
                         //update state
                     }
@@ -75,6 +75,7 @@ namespace Generic_Planner
                     if(!CheckIfInList(successor, openList) && !CheckIfInList(successor, closedList))
                     {
                         openList.Add(successor);
+                        //Console.WriteLine("OpenList Add");
                     }
 
                 }
