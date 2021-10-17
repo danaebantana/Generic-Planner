@@ -8,15 +8,17 @@ namespace Generic_Planner
 {
     class BlockState : State
     {
-        private List<char[]> elements = new List<char[]>();
+        private List<char[]> elements = new List<char[]>();  //Each char[] represents a stack of blocks. The List<char[]> represents the state of the BlockState
         private int cost;
         private string path;
+        private int steps;
 
-        public BlockState(List<char[]> elem)  //Constructor for initial state;
+        public BlockState(List<char[]> elem)  //Constructor for all states
         {
             this.elements = elem;
             this.cost = 0;
             this.path = CharListToString(elements);
+            this.steps = 0;
         }
 
         public int GetCost()
@@ -29,7 +31,7 @@ namespace Generic_Planner
             return this.path;
         }
 
-        public (T, T) GetState<T>()
+        public (T, T) GetState<T>()   //Returns the elements of the state as List<char[]>
         {
             return ((T)Convert.ChangeType(this.elements, typeof(T)), (T)Convert.ChangeType(null, typeof(T)));
         }
@@ -44,7 +46,7 @@ namespace Generic_Planner
             this.path = states + "\n" + CharListToString(this.elements);
         }
 
-        public string CharListToString(List<char[]> list)
+        public string CharListToString(List<char[]> list)  //Returns the state elements in a form of a sequence for a nicer representation in the console
         {
             string sequence = "";
             int k = list.Count;
@@ -69,6 +71,16 @@ namespace Generic_Planner
                 }
             }
             return sequence;
+        }
+
+        public void SetSteps(int s)
+        {
+            this.steps = s++;
+        }
+
+        public int GetSteps()
+        {
+            return this.steps;
         }
     }
 }

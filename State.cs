@@ -8,14 +8,12 @@ namespace Generic_Planner
 {
     interface State
     {
-        int GetCost();
-
-        string GetPath();
-
-        void SetPath(string states);
-
-        (T, T) GetState<T>();
-
         public void SetCost(int c);
+        int GetCost();
+        void SetPath(string states);
+        string GetPath();
+        (T, T) GetState<T>();  //Returns elements of the class that implements the interface.
+        public void SetSteps(int s);
+        public int GetSteps();
     }
 }

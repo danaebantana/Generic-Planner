@@ -18,16 +18,17 @@ namespace Generic_Planner
             this.goalWaterLevel = par.ElementAt(2);
         }
 
-        public override State InitialState()   //InitialState jugs have 0 in current level of water.
+        public override State InitialState()   //The jugs of the InitialState have 0 in current water levels.
         {
             initialState = new WaterJugState(sizeJug1, sizeJug2);
-            //initialState.AddToPath(initialState);   
+            Console.WriteLine("Initial State: ( 0 , 0 )");   
             return initialState;
         }
 
         public override State GoalState()
         {
-            goalState = new WaterJugState(sizeJug1, sizeJug2, goalWaterLevel);        
+            goalState = new WaterJugState(sizeJug1, sizeJug2, goalWaterLevel);
+            Console.WriteLine("Goal State: ( " + goalWaterLevel + " , _ )");
             return goalState;
         }
 
@@ -49,7 +50,6 @@ namespace Generic_Planner
             List<State> successors = new List<State>();
             int J1 = sizeJug1, J2 = sizeJug2;
             (int C1, int C2) = state.GetState<int>();
-            //Console.WriteLine("Generate Successors of state + ("+ C1 + " , " + C2 +")");
             State child;
             //Actions
             if (C1 < J1) //Fill Jug1
@@ -73,7 +73,6 @@ namespace Generic_Planner
                 child = new WaterJugState(J1, J2, C1, 0);
                 successors.Add(child);
             }
-            //Problem
             if (C1 != J1)
             {
                 if (C2 > J1 - C1 && C2 > 0)   //Pour Jug2 to Fill Jug1
@@ -109,7 +108,7 @@ namespace Generic_Planner
             int stateCost = state.GetCost();
             (int GC1, int GC2) = goalState.GetState<int>();
             int goalCost = goalState.GetCost();
-            if (C1==GC1 && stateCost <= goalCost)
+            if (C1==GC1)
             {
                 return true;
             } 
@@ -119,12 +118,12 @@ namespace Generic_Planner
             }
         }
 
-        public override int Heuristic(State state)
+        public override int Heuristic(State state)   //Heuristic Function
         {
             return 1;
         }
 
-        public override bool CheckSuccessor(State state, List<State> list)
+        public override bool CheckSuccessor(State state, List<State> list)   //Return true if state is already in list in has a smaller cost value
         {
             foreach (State s in list)
             {
@@ -139,7 +138,7 @@ namespace Generic_Planner
             return false;
         }
 
-        public override bool CheckIfInList(State state, List<State> list)
+        public override bool CheckIfInList(State state, List<State> list)   //Return true if state is already in list
         {
             foreach (State s in list)
             {
@@ -151,9 +150,5 @@ namespace Generic_Planner
             return false;
         }
 
-        public override void UpdateState(State state, List<State> list)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

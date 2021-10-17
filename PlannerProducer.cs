@@ -8,7 +8,7 @@ namespace Generic_Planner
 {
     class PlannerProducer
     {
-        public AbstractDomain CreateDomain(String domain)
+        public AbstractDomain CreateDomain(String domain)   //Returns the desired AbstractDomain depending on the string given.
         {
             if (domain == null)
             {

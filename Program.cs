@@ -10,45 +10,78 @@ namespace Generic_Planner
             PlannerProducer pp = new PlannerProducer();
             AbstractDomain planner = null;
 
-            Console.WriteLine("Games:\n1. Water Pouring Problem \n2. Blocks World\n3. Exit\nEnter choice:");
-            
-            int choice = Int32.Parse(Console.ReadLine());
-            while (choice < 1 || choice > 3){
-                Console.WriteLine("Need to choose one of the above choice numbers!");
-                choice = Int32.Parse(Console.ReadLine());
-            }
-           
-            while(choice != 3)
+            Console.WriteLine("Welcome to Generic Planner");
+            int choice;
+
+            while (true)
             {
+                Console.WriteLine("Games:\n1. Water Pouring Problem \n2. Blocks World\n3. Exit\n\nEnter choice:");
+
+                choice = Int32.Parse(Console.ReadLine());
+                while (choice < 1 || choice > 3)
+                {
+                    Console.WriteLine("Need to choose one of the above choice numbers!");
+                    choice = Int32.Parse(Console.ReadLine());
+                }
+
                 if (choice == 1)
                 {
-                    Console.WriteLine("Water Pouring Problem:\nEnter liter amount for Jug1:");
-                    int liter1 = Int32.Parse(Console.ReadLine());
-                    Console.WriteLine("Enter liter amount for Jug2:");
-                    int liter2 = Int32.Parse(Console.ReadLine());
-                    Console.WriteLine("Enter goal liter amount for Jug1:");
-                    int goalLiter = Int32.Parse(Console.ReadLine());
+                    Console.WriteLine("\nWater Pouring Problem:");
+                    int liter1, liter2, goalLiter;
+
+                    do    //liter1 needs to be a positive number 
+                    {
+                        Console.WriteLine("Enter liter amount for Jug1:\n!Note: Liter must be a positive number.");
+                        liter1 = Int32.Parse(Console.ReadLine());
+                    } while (liter1 < 0);
+
+                    do    //liter2 needs to be a positive number 
+                    {
+                        Console.WriteLine("Enter liter amount for Jug2:\n!Note: Liter must be a positive number.");
+                        liter2 = Int32.Parse(Console.ReadLine());
+                    } while (liter2 < 0);
+                    
+                    do    //goalLiter needs to be a positive number and smaller than the water capacity of jug1 
+                    {
+                        Console.WriteLine("Enter goal liter amount for Jug1:\n!Note: Liter must be a positive number and smaller than the water capacity of jug1.");
+                        goalLiter = Int32.Parse(Console.ReadLine());
+                    } while (goalLiter > liter1 || goalLiter < 0);
+                    
                     planner = pp.CreateDomain("WaterPouringProblem");
                     planner.SetParameters(new List<int>() { liter1, liter2, goalLiter });
                 }
                 else if (choice == 2)
                 {
-                    Console.WriteLine("Blocks World:\nEnter number of blocks:");
-                    int blocks = Int32.Parse(Console.ReadLine());
-                    Console.WriteLine("Enter number of stacks for initial state:\n!Note: Number of stacks needs to be smaller or equal to number of blocks.");
-                    int stacks = Int32.Parse(Console.ReadLine());
+                    Console.WriteLine("\nBlocks World:");
+                    int blocks, stacks;
+
+                    do    //blocks number needs to be smaller than 26 and a positive number
+                    {
+                        Console.WriteLine("Enter number of blocks:\n!Note: Number of blocks need to be smaller or equal to 26");
+                        blocks = Int32.Parse(Console.ReadLine());
+                    } while (blocks > 26 || blocks < 0);
+
+                    do    //stacks number needs to be smaller of equal to number of blocks and a positive number
+                    {
+                        Console.WriteLine("Enter number of stacks for initial state:\n!Note: Number of stacks needs to be smaller or equal to number of blocks.");
+                        stacks = Int32.Parse(Console.ReadLine());
+                    } while (stacks > blocks || stacks < 0);
+
                     planner = pp.CreateDomain("BlocksWorld");
                     planner.SetParameters(new List<int>() { blocks, stacks });
-                    Console.WriteLine("Blocks World:\n");
+                }
+                else
+                {
+                    Console.WriteLine("Exit");
+                    break;
                 }
 
                 State initalState = planner.InitialState();
                 State goalState = planner.GoalState();
-                string solution = planner.GeneratePlan(initalState, goalState);
+                (string solution, int steps) = planner.GeneratePlan(initalState, goalState);
                 Console.WriteLine("Solution:\n" + solution);
+                Console.WriteLine("Number of Steps:\n" + steps + "\n");
             }
-            Console.WriteLine("Exit");
-
         }
     }
 }

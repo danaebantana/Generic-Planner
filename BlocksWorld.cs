@@ -8,12 +8,12 @@ namespace Generic_Planner
 {
     class BlocksWorld : AbstractDomain
     {
-        private int blocks, stacks;   //number of blocks and number of stacks of initial state.
+        private int blocks, stacks;   //number of blocks. Number of stacks of initial state.
         private State initialState, goalState;
         private Random random= new Random();
-        private string data = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        private List<char> datalist = new List<char>();
-        private List<char> dataBlocks = new List<char>();   //contains the block characters depending on the number of blocks given by the user. 
+        private string data = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";  //English Alphabet
+        private List<char> datalist = new List<char>();      //contains the letters of the english alphabet in a form of a list.
+        private List<char> dataBlocks = new List<char>();    //contains the block characters depending on the number of blocks given by the user. 
 
         public override void SetParameters(List<int> par)
         {
@@ -37,19 +37,9 @@ namespace Generic_Planner
             //Determine random blocks
             List<char> Blocks = dataBlocks.OrderBy(b => random.Next()).ToList();
             List<char[]> elements = new List<char[]>();
-            if (stacks == 0)
-            {
-                throw new Exception("The number of stacks can't be zero");
-            }
-            else if (stacks == 1)
+            if (stacks == 1)
             {
                 elements.Add(Blocks.ToArray());  //{ [ ... ] } -> one stack
-                //Console.WriteLine(elements.ElementAt(0).Length.ToString());
-                //Console.WriteLine(elements.Count.ToString());
-            }
-            else if (stacks > blocks)
-            {
-                throw new Exception("The number of stacks needs to be smaller or equal to the number of blocks");
             }
             else
             {
@@ -70,6 +60,7 @@ namespace Generic_Planner
                 }
             }
             initialState = new BlockState(elements);
+            Console.WriteLine("Initial State: " + initialState.GetPath());
             return initialState;
         }
 
@@ -77,6 +68,7 @@ namespace Generic_Planner
         {
             List<char[]> elements = new List<char[]> { dataBlocks.ToArray() };
             goalState = new BlockState(elements);
+            Console.WriteLine("Goal State: " + goalState.GetPath());
             return goalState;
         }
 
@@ -124,28 +116,37 @@ namespace Generic_Planner
             return successors;
         }
 
-        public List<char[]> PlaceOnTop(char[] sE, char[] fe, char[] arr, List<char[]> list)   //Replaces the elements, which show a state of the world, to have the new state.
+        public char[] NewBlockStateTop(char[] arr, char elem)   //Add element to a stack
         {
+            string lastElement = elem.ToString();
+            string str = new string(arr);
+            str += lastElement;
+            arr = str.ToCharArray();
+            return arr;
+        }
+        
+        public List<char[]> PlaceOnTop(char[] sR, char[] sA, char[] arr, List<char[]> list)   //Creates the new state for the action: Move block on top of another block
+        {
+            //sR = the stack the element is going to be removed from
+            //sA = the stack the element is going to be added to
+            //arr = the new stack that will replace the sA
+            //list = contains the elements of the state
             List<char[]> newList = new List<char[]>();
-            foreach (char[] ch in list)
+            foreach (char[] ch in list)   //foreach stack
             {
-                if (ch.Equals(sE))
+                if (ch.Equals(sR))
                 {
-                    if (sE.Length == 1)
+                    if (!(sR.Length == 1))  //If sR length == 1 we want to remove the stack so we ignore it
                     {
-                        //Dont add to arr. 
-                    }
-                    else
-                    {
-                        char[] newSE = RemoveElement(sE, sE.Last());
+                        char[] newSE = RemoveElement(sR, sR.Last());
                         newList.Add(newSE);
                     }
                 }
-                else if (ch.Equals(fe))
+                else if (ch.Equals(sA)) //sA gets replaced in new state by the arr.
                 {
                     newList.Add(arr);
                 }
-                else
+                else   //stack that is not getting changed
                 {
                     newList.Add(ch);
                 }
@@ -154,18 +155,7 @@ namespace Generic_Planner
             return newList;
         }
 
-        public char[] NewBlockStateTop(char[] arr, char elem)
-        {
-            string lastElement = elem.ToString();
-            string str = new string(arr);
-            //int index = str.IndexOf(lastElement);
-            //str = str.Remove(index, 1);
-            str += lastElement;
-            arr = str.ToCharArray();
-            return arr;
-        }
-
-        public char[] RemoveElement(char[] arr, char elem)
+        public char[] RemoveElement(char[] arr, char elem)  //Remove element from stack
         {
             string str = new string(arr);
             int index = str.IndexOf(elem);
@@ -174,19 +164,20 @@ namespace Generic_Planner
             return arr;
         }
 
-        public List<char[]> PlaceOnTable(char[] sE, List<char[]> list)
+        public List<char[]> PlaceOnTable(char[] sR, List<char[]> list)   //Creates the new state for the action: Move block on table
         {
+            //sR = the stack the element is going to be removed from
             List<char[]> newList = new List<char[]>();
             foreach (char[] ch in list)
             {
-                if (ch.Equals(sE))
+                if (ch.Equals(sR))
                 {
-                    char[] newSE = RemoveElement(sE, sE.Last());
+                    char[] newSE = RemoveElement(sR, sR.Last());
                     newList.Add(newSE);
-                    char[] newCh = new Char[] { sE.Last() };
+                    char[] newCh = new Char[] { sR.Last() };  //Makes stack with the removed element
                     newList.Add(newCh);
                 }
-                else
+                else   //stack that is not getting changed
                 {
                     newList.Add(ch);
                 }
@@ -202,11 +193,11 @@ namespace Generic_Planner
             (List<char[]> goalElements, List<char[]> __null) = goalState.GetState<List<char[]>>();
             int goalCost = goalState.GetCost();
             int count = 0;
-            if (elements.Count == goalElements.Count && stateCost <= goalCost)
+            if (elements.Count == goalElements.Count)  //Same number of stacks  
             {
-                for (int i=0; i<elements.Count; i++)
+                for (int i=0; i<elements.Count; i++)  //Counts how many elements of the two sequences are the same
                 {
-                    if (elements.ElementAt(i).SequenceEqual(goalElements.ElementAt(i)))
+                    if (elements.ElementAt(i).SequenceEqual(goalElements.ElementAt(i)))   
                     {
                         count++;
                     }
@@ -216,7 +207,7 @@ namespace Generic_Planner
             {
                 return false;
             }
-            if(count == elements.Count)
+            if(count == elements.Count)   //Same sequence
             {
                 return true;
             }
@@ -226,18 +217,18 @@ namespace Generic_Planner
             }
         }
 
-        public override int Heuristic(State state)
+        public override int Heuristic(State state)   //Heuristic Function
         {
             (List<char[]> elements, List<char[]> _null) = state.GetState<List<char[]>>();
             (List<char[]> goalElements, List<char[]> __null) = goalState.GetState<List<char[]>>();
-            int error = 0;
+            int cost = 0;
             if(elements.Count == 1)  //One stack in current state
             {
                 for(int i = 0; i < elements.ElementAt(0).Length; i++)
                 {
-                    if (!elements.ElementAt(0).ElementAt(i).Equals(goalElements.ElementAt(0).ElementAt(i)))
+                    if (!elements.ElementAt(0).ElementAt(i).Equals(goalElements.ElementAt(0).ElementAt(i)))   //For each different element add 1
                     {
-                        error += 1;
+                        cost += 1;
                     }
                 }
             } 
@@ -246,31 +237,29 @@ namespace Generic_Planner
                 for(int i = 0; i < elements.Count; i++)
                 {
                     char[] temp = elements.ElementAt(i);
-                    if(temp.Length == 1)
+                    if(temp.Length == 1)  //For each stack with one element add 1
                     {
-                        error += 1;
+                        cost += 1;
                     }
                     else
                     {
                         for(int j = 0; j < temp.Length; j++)
                         {
-                            if (!temp.ElementAt(j).Equals(goalElements.ElementAt(0).ElementAt(j)))
+                            if (!temp.ElementAt(j).Equals(goalElements.ElementAt(0).ElementAt(j)))  //For each element of stack in different order than the goalState sequence add 2
                             {
-                                error += 2;
+                                cost += 2;
                             }
                         }
                     }
                 }   
-
             }
 
-            return error;
+            return cost;
         }
 
-        public override bool CheckSuccessor(State state, List<State> list)
+        public override bool CheckSuccessor(State state, List<State> list)   //Return true if state is already in list in has a smaller cost value
         {
             (List<char[]> elements, List<char[]> _null) = state.GetState<List<char[]>>();
-            int stateCost = state.GetCost();
             foreach (State s in list)
             {
                 (List<char[]> e, List<char[]> __null) = s.GetState<List<char[]>>();;
@@ -297,10 +286,9 @@ namespace Generic_Planner
         }
 
 
-        public override bool CheckIfInList(State state, List<State> list)
+        public override bool CheckIfInList(State state, List<State> list)     //Return true if state is already in list
         {
             (List<char[]> elements, List<char[]> _null) = state.GetState<List<char[]>>();
-            int stateCost = state.GetCost();
             foreach (State s in list)
             {
                 (List<char[]> e, List<char[]> __null) = s.GetState<List<char[]>>(); ;
@@ -323,10 +311,5 @@ namespace Generic_Planner
             return false;
         }
 
-
-        public override void UpdateState(State state, List<State> list)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
