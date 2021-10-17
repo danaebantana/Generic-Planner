@@ -57,13 +57,13 @@ namespace Generic_Planner
 
                     do    //blocks number needs to be smaller than 26 and a positive number
                     {
-                        Console.WriteLine("Enter number of blocks:\n!Note: Number of blocks need to be smaller or equal to 26");
+                        Console.WriteLine("Enter number of blocks:\n!Note: Number of blocks need to be smaller or equal to 26 and positive");
                         blocks = Int32.Parse(Console.ReadLine());
                     } while (blocks > 26 || blocks < 0);
 
                     do    //stacks number needs to be smaller of equal to number of blocks and a positive number
                     {
-                        Console.WriteLine("Enter number of stacks for initial state:\n!Note: Number of stacks needs to be smaller or equal to number of blocks.");
+                        Console.WriteLine("Enter number of stacks for initial state:\n!Note: Number of stacks needs to be smaller or equal to number of blocks and positive.");
                         stacks = Int32.Parse(Console.ReadLine());
                     } while (stacks > blocks || stacks < 0);
 
